@@ -3,11 +3,11 @@ import { resolve } from 'path';
 
 dotenv.config();
 
-import './database';
+import './src/database';
 
 import express from 'express';
 
-import homeRoutes from './routes/homeRoutes';
+import homeRoutes from './src/routes/homeRoutes';
 
 class App {
   constructor() {
