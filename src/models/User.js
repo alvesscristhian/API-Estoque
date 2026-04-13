@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
-export default class Usuario extends Model {
+export default class User extends Model {
   static init(sequelize) {
     super.init({
       nome: {

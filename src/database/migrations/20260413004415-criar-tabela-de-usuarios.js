@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) { // Estrutura e regra todos os dados
-    await queryInterface.createTable('usuarios', { // Cria tabela usuários
+    await queryInterface.createTable('users', { // Cria tabela usuários
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,

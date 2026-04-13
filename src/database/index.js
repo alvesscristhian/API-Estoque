@@ -1,8 +1,9 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
-import Foto from '../models/Foto';
+import User from '../models/User';
+import Photo from '../models/Photo';
 
-const models = [Foto]; // Armazena todos os models em um Array
+const models = [User, Photo]; // Armazena todos os models em um Array
 
 const connection = new Sequelize(databaseConfig); // Instância de um Sequelize com configs do banco
 
