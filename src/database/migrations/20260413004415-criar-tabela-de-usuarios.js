@@ -33,6 +33,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('usuarios');
+    await queryInterface.dropTable('users');
   },
 };

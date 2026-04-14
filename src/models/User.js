@@ -6,37 +6,37 @@ export default class User extends Model {
     super.init({
       nome: {
         type: Sequelize.STRING,
-        defaultValue: '', // Valor padrão
-        validate: { // Objeto de validação, herda métodos do validator
-          len: { // Length
-            args: [3, 255], // Argumentos
-            msg: 'O campo deve ter entre 3 e 255 caracteres.', // Mensagem de erro
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [3, 255],
+            msg: 'O campo deve ter entre 3 e 255 caracteres.',
           },
         },
       },
       email: {
         type: Sequelize.STRING,
-        defaultValue: '', // Valor padrão
-        unique: { // Se não for unico na base de dados mostra erro
+        defaultValue: '',
+        unique: {
           msg: 'E-mail já cadastrado.',
         },
         validate: {
-          isEmail: { // E-mail inválido? Mostra erro
+          isEmail: {
             msg: 'E-mail inválido.',
           },
         },
-        password_hash: {
-          type: Sequelize.STRING,
-          defaultValue: '',
-        },
-        password: {
-          tyoe: Sequelize.STRING,
-          defaultValue: '',
-          validate: {
-            len: {
-              args: [8, 50],
-              msg: 'Senha precisa ter entre 8 e 50 caracteres',
-            },
+      },
+      password_hash: {
+        type: Sequelize.STRING,
+        defaultValue: '',
+      },
+      password: {
+        type: Sequelize.VIRTUAL, //
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [8, 50],
+            msg: 'Senha precisa ter entre 8 e 50 caracteres',
           },
         },
       },
@@ -44,16 +44,17 @@ export default class User extends Model {
       sequelize,
     });
 
-    this.addHook('beforeSave', async (user) => { // Antes de salvar na base de dados, faça:
+    this.addHook('beforeSave', async (user) => {
       if (user.password) {
-        user.password_hash = bcrypt.hash(user.password, 8);
+        // <-- Adicionado o 'await' antes do bcrypt
+        user.password_hash = await bcrypt.hash(user.password, 8);
       }
     });
 
     return this;
   }
 
-  validaSenha(password) { // A senha bate com o hash?
+  validaSenha(password) {
     return bcrypt.compare(password, this.password_hash);
   }
 }
