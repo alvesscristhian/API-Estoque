@@ -70,6 +70,27 @@ class UserController {
       });
     }
   }
+
+  async delete(req, res) {
+    try {
+      const user = await User.findByPk(req.params.id);
+
+      if (!user) {
+        return res.status(404).json({
+          errors: ['Usuário não encontrado'],
+        });
+      }
+
+      await user.destroy();
+      return res.status(200).json(null);
+    } catch (e) {
+      console.error(e);
+
+      return res.status(500).json({
+        errors: ['Erro interno no servidor.'],
+      });
+    }
+  }
 }
 
 export default new UserController();
