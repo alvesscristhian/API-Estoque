@@ -14,7 +14,12 @@ class UserController {
   }
 
   async index(req, res) {
-    return res.json('Users');
+    try {
+      const users = await User.findAll({ attributes: ['id', 'nome', 'email'] });
+      return res.json(users);
+    } catch (e) {
+      return res.status(404).json('Não existem usuários cadastrados');
+    }
   }
 }
 
