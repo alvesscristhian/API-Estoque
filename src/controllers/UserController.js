@@ -23,7 +23,7 @@ class UserController {
 
       // Retorna um erro de servidor genérico para não expor detalhes sensíveis
       return res.status(500).json({
-        error: 'Ocorreu um erro interno ao buscar os usuários.',
+        errors: 'Ocorreu um erro interno ao buscar os usuários.',
       });
     }
   }
@@ -44,7 +44,7 @@ class UserController {
       console.error(e);
 
       return res.status(500).json({
-        errors: ['Erro interno no servidor.'],
+        errors: ['Erro ao buscar usuário.'],
       });
     }
   }
@@ -66,7 +66,7 @@ class UserController {
       console.error(e);
 
       return res.status(500).json({
-        errors: ['Erro interno no servidor.'],
+        errors: ['Erro ao atualizar usuário.'],
       });
     }
   }
@@ -87,7 +87,7 @@ class UserController {
       console.error(e);
 
       return res.status(500).json({
-        errors: ['Erro interno no servidor.'],
+        errors: ['Erro ao excluir usuário.'],
       });
     }
   }
