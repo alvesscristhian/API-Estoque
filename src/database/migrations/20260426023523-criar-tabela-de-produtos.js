@@ -20,8 +20,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      quantidade: {
+      amount: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      color: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {

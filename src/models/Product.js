@@ -18,8 +18,8 @@ export default class Product extends Model {
         defaultValue: '',
         validate: {
           len: {
-            args: [3, 255],
-            msg: 'O campo deve ter entre 3 e 255 caracteres.',
+            args: [0, 255],
+            msg: 'O campo deve ter entre 0 e 255 caracteres.',
           },
         },
       },
@@ -33,13 +33,26 @@ export default class Product extends Model {
           },
         },
       },
-      quantidade: {
+      amount: {
         type: Sequelize.INTEGER,
-        defaultValue: '',
+        defaultValue: 0,
         validate: {
           isInt: {
             msg: 'O campo deve ser um número inteiro.',
           },
+        },
+      },
+      color: {
+        type: Sequelize.STRING,
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [0, 50],
+            msg: 'O campo deve ter entre 0 e 50 caracteres.',
+          },
+        },
+        set(value) {
+          this.setDataValue('color', value ? value.trim().toLowerCase() : '');
         },
       },
     }, {
