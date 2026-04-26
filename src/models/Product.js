@@ -32,6 +32,9 @@ export default class Product extends Model {
             msg: 'O campo deve ter entre 3 e 255 caracteres.',
           },
         },
+        set(value) {
+          this.setDataValue('color', value ? value.trim().toLowerCase() : '');
+        },
       },
       amount: {
         type: Sequelize.INTEGER,
